@@ -1,2 +1,3 @@
-# live-streaming-platform
-Open source live streaming platform
+# Now Live - an open streaming platform
+
+...
