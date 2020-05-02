@@ -1,4 +1,4 @@
-.PHONY: clean help
+.PHONY: clean help ingest package
 
 clean: ## Remove media files
 	find media -mindepth 1 ! -iname '.keep' -exec rm -r {} \;
