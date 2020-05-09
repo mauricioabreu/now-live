@@ -6,7 +6,7 @@ import (
 
 func main() {
 	store := NewStore()
-	watcher := NewWatcher("media")
+	watcher := NewWatcher("/app/media")
 	watcher.Start()
 
 	done := make(chan struct{}, 1)

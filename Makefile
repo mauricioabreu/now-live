@@ -3,7 +3,7 @@
 RECORDER_VERSION=0.0.1
 
 clean: ## Remove media files
-	find media -mindepth 1 ! -iname '.keep' -exec rm -r {} +;
+	find media -mindepth 1 ! -iname '.keep' -exec rm -r {} \;
 
 ingest: ## Produce some video and ingest it in the packager
 	./ingest.sh
