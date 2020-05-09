@@ -1,6 +1,29 @@
-version: '3.3'
+version: '3.7'
 
 services:
+  recorder:
+    build:
+      context: .
+      dockerfile: Dockerfile-recorder
+    volumes:
+      - video:/app/media
+
+  packager:
+    image: google/shaka-packager
+    command:
+      - /bin/sh
+      - -c
+      - |
+        packager 'in=udp://0.0.0.0:40001?reuse=1,stream=video,segment_template=/video/live_288p/$$Number$$.ts,playlist_name=/video/live_288p/main.m3u8,iframe_playlist_name=/video/live_288p/iframe.m3u8' \
+        'in=udp://0.0.0.0:40002?reuse=1,stream=video,segment_template=/video/live_432p/$$Number$$.ts,playlist_name=/video/live_432p/main.m3u8,iframe_playlist_name=/video/live_432p/iframe.m3u8' \
+        --hls_master_playlist_output /video/live.m3u8 \
+        --hls_playlist_type LIVE
+    volumes:
+      - video:/video
+    ports:
+      - "40001:40001/udp"
+      - "40002:40002/udp"
+
   minio1:
     image: minio/minio:RELEASE.2020-04-10T03-34-42Z
     volumes:
@@ -80,3 +103,4 @@ volumes:
   data3-2:
   data4-1:
   data4-2:
+  video:
