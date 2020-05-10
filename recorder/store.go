@@ -12,7 +12,7 @@ type Store struct {
 }
 
 func NewStore() *Store {
-	endpoint := "localhost:9001"
+	endpoint := "minio1:9000"
 	accessKeyID := "minio"
 	secretAccessKey := "minio123"
 	client, err := minio.New(endpoint, accessKeyID, secretAccessKey, false)
