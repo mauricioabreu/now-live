@@ -2,6 +2,11 @@ package main
 
 import (
 	"log"
+	"regexp"
+)
+
+var (
+	regexTempl = regexp.MustCompile(`^.*\.(m3u8|ts)$`)
 )
 
 func main() {
@@ -15,8 +20,10 @@ func main() {
 		for {
 			select {
 			case ev := <-watcher.EventStream:
-				log.Print(ev.Path())
-				store.UploadFile(ev.Path())
+				if regexTempl.MatchString(ev.Path()) {
+					log.Print(ev.Path())
+					go store.UploadFile(ev.Path())
+				}
 			}
 		}
 	}()

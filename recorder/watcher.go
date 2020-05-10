@@ -20,7 +20,7 @@ func NewWatcher(path string) *Watcher {
 }
 
 func (w *Watcher) Start() {
-	if err := notify.Watch(w.Path, w.EventStream, notify.InCloseWrite); err != nil {
+	if err := notify.Watch(w.Path, w.EventStream, notify.InCloseWrite, notify.InMovedTo); err != nil {
 		log.Fatal(err)
 	}
 }

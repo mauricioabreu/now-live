@@ -6,6 +6,7 @@ ingest: ## Produce some video and ingest it in the packager
 	./ingest.sh
 
 now-live: ## Run Now Live platform
+	docker-compose build
 	docker-compose up
 
 recorder-build: ## Build recorder image
