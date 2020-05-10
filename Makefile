@@ -1,4 +1,4 @@
-.PHONY: help ingest package recorder
+.PHONY: help ingest now-live package recorder
 
 RECORDER_VERSION=0.0.1
 

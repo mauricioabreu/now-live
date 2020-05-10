@@ -8,8 +8,6 @@ I created this project to experiment some video tools. Could this be an open str
 
 ## How to use?
 
-`make package` starts a packager container ready to receive a UDP streaming.
+`make now-live` will build the packager, recorder and storage and get it all up and running.
 
 `make ingest` produce and ingest some video so the packager can produce HLS playlists.
-
-After using it, you can run `make clean` to remove all the media files.
