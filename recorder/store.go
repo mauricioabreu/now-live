@@ -41,9 +41,8 @@ func (s *Store) UploadFile(filePath string) {
 	}
 
 	objectName := filepath.Base(filePath)
-	contentType := "application/octet-stream"
 
-	n, err := s.Client.FPutObject(bucketName, objectName, filePath, minio.PutObjectOptions{ContentType: contentType})
+	n, err := s.Client.FPutObject(bucketName, objectName, filePath, minio.PutObjectOptions{})
 	if err != nil {
 		log.Fatalln(err)
 	}

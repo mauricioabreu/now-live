@@ -9,6 +9,9 @@ now-live: ## Run Now Live platform
 	docker-compose build
 	docker-compose up
 
+down-live: ## Stop Now Live platform
+	docker-compose down
+
 recorder-build: ## Build recorder image
 	docker build --tag recorder:${RECORDER_VERSION} -f Dockerfile-recorder .
 
