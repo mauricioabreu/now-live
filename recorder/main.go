@@ -10,7 +10,11 @@ var (
 )
 
 func main() {
-	store := NewStore()
+	store := NewStore("video")
+	err := store.CreateBucket("video")
+	if err != nil {
+		log.Fatalf("Failed to create bucket:", err)
+	}
 	watcher := NewWatcher("/app/media")
 	watcher.Start()
 

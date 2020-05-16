@@ -2,16 +2,16 @@ package main
 
 import (
 	"log"
-	"path/filepath"
 
 	"github.com/minio/minio-go"
 )
 
 type Store struct {
-	Client *minio.Client
+	Client     *minio.Client
+	bucketName string
 }
 
-func NewStore() *Store {
+func NewStore(bucketName string) *Store {
 	endpoint := "minio_proxy:80"
 	accessKeyID := "minio"
 	secretAccessKey := "minio123"
@@ -20,32 +20,29 @@ func NewStore() *Store {
 		log.Fatal(err)
 	}
 
-	log.Printf("%#v\n", client)
-	return &Store{Client: client}
+	return &Store{Client: client, bucketName: bucketName}
 }
 
 func (s *Store) UploadFile(filePath string) {
 	bucketName := "video"
-	location := "us-east-1"
+	resource := Resource{File: filePath}
 
-	err := s.Client.MakeBucket(bucketName, location)
-	if err != nil {
-		exists, errExists := s.Client.BucketExists(bucketName)
-		if errExists == nil && exists {
-			log.Printf("Bucket %s already exists\n", bucketName)
-		} else {
-			log.Fatalln(err)
-		}
-	} else {
-		log.Printf("Bucket successfully created %s\n", bucketName)
-	}
-
-	objectName := filepath.Base(filePath)
-
-	n, err := s.Client.FPutObject(bucketName, objectName, filePath, minio.PutObjectOptions{})
+	n, err := s.Client.FPutObject(bucketName, resource.ObjectName("/app/media"), filePath, minio.PutObjectOptions{})
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	log.Printf("Successfully uploaded %s of size %d\n", objectName, n)
+	log.Printf("Successfully uploaded %s of size %d\n", filePath, n)
+}
+
+func (s *Store) CreateBucket(bucketName string) error {
+	err := s.Client.MakeBucket(bucketName, "us-east-1")
+	if err != nil {
+		exists, errExists := s.Client.BucketExists(bucketName)
+		if errExists == nil && exists {
+			return nil
+		}
+		return errExists
+	}
+	return err
 }
