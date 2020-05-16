@@ -20,7 +20,6 @@ func NewStore() *Store {
 		log.Fatal(err)
 	}
 
-	log.Printf("%#v\n", client)
 	return &Store{Client: client}
 }
 

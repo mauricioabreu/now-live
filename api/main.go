@@ -27,18 +27,18 @@ func NewAPI() *API {
 
 func main() {
 	api := NewAPI()
-	api.GET("/live/:resource", api.GetResource)
+	api.GET("/live/*", api.GetResource)
 	api.Logger.Fatal(api.Start(":1323"))
 }
 
 func (a *API) GetResource(c echo.Context) error {
-	resource := c.Param("resource")
-	object, err := a.store.GetObject(resource)
+	resource := Resource{Path: c.Request().RequestURI}
+	object, err := a.store.GetObject(resource.ObjectName())
 	if err != nil {
 		return err
 	}
 
-	contentType := mime.TypeByExtension(filepath.Ext(resource))
+	contentType := mime.TypeByExtension(filepath.Ext(resource.Path))
 	c.Response().Header().Set(echo.HeaderContentType, contentType)
 	return c.String(http.StatusOK, string(object))
 }
