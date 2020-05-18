@@ -10,7 +10,7 @@ Have you ever used live streaming tools like Youtube, Instagram and Facebook? Th
 
 *Now Live* assembles some of these tools together, creating a platform where people can stream their videos, packaging it for multiple devices using standard video formats.
 
-To better understand the platform, we can reduce it in two partes: **producer** and **consumer**.
+To better understand the platform, we can reduce it in two parts: **producer** and **consumer**.
 
 ### Producer
 
