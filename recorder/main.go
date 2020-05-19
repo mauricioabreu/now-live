@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	regexTempl = regexp.MustCompile(`^.*\.(m3u8|ts)$`)
+	regexTempl = regexp.MustCompile(`^.*\.(m3u8|mp4|ts)$`)
 )
 
 func main() {
