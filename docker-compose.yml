@@ -14,7 +14,9 @@ services:
       - /bin/sh
       - -c
       - |
-        packager 'in=udp://0.0.0.0:40001?reuse=1,stream=video,segment_template=/video/colors/colors_288p/$$Number$$.ts,playlist_name=/video/colors/colors_288p/main.m3u8,iframe_playlist_name=/video/colors/colors_288p/iframe.m3u8' \
+        packager \
+        'in=udp://0.0.0.0:40001?reuse=1,stream=audio,segment_template=/video/colors/audio/$$Number$$.aac,playlist_name=/video/colors/audio/main.m3u8,hls_group_id=audio,hls_name=ENGLISH' \
+        'in=udp://0.0.0.0:40001?reuse=1,stream=video,segment_template=/video/colors/colors_288p/$$Number$$.ts,playlist_name=/video/colors/colors_288p/main.m3u8,iframe_playlist_name=/video/colors/colors_288p/iframe.m3u8' \
         'in=udp://0.0.0.0:40002?reuse=1,stream=video,segment_template=/video/colors/colors_432p/$$Number$$.ts,playlist_name=/video/colors/colors_432p/main.m3u8,iframe_playlist_name=/video/colors/colors_432p/iframe.m3u8' \
         --hls_master_playlist_output /video/colors/playlist.m3u8 \
         --hls_playlist_type LIVE
