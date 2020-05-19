@@ -11,6 +11,7 @@ import (
 func init() {
 	mime.AddExtensionType(".ts", "video/mp2t")
 	mime.AddExtensionType(".m3u8", "application/vnd.apple.mpegurl")
+	mime.AddExtensionType(".mp4", "video/mp4")
 }
 
 type API struct {
