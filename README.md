@@ -30,6 +30,8 @@ And here we have another diagram, but now we represent the user consuming our st
 
 `make ingest` produce and ingest a sample video so the packager can produce HLS playlists.
 
+**These two commands must run simultaneously.**
+
 Now you can point your browser to http://localhost:8080/play and play the sample video.
 
 ### Components
