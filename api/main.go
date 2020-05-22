@@ -35,6 +35,11 @@ func main() {
 func (a *API) GetResource(c echo.Context) error {
 	resource := Resource{Path: c.Request().RequestURI}
 	object, err := a.store.GetObject(resource.ObjectName())
+	if len(object) == 0 {
+		c.Response().WriteHeader(http.StatusNotFound)
+		return err
+	}
+
 	if err != nil {
 		return err
 	}
