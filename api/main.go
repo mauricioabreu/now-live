@@ -4,6 +4,7 @@ import (
 	"mime"
 	"net/http"
 	"path/filepath"
+	"strconv"
 
 	"github.com/labstack/echo/v4"
 )
@@ -46,5 +47,6 @@ func (a *API) GetResource(c echo.Context) error {
 
 	contentType := mime.TypeByExtension(filepath.Ext(resource.Path))
 	c.Response().Header().Set(echo.HeaderContentType, contentType)
+	c.Response().Header().Set(echo.HeaderContentLength, strconv.Itoa(len(object)))
 	return c.String(http.StatusOK, string(object))
 }
