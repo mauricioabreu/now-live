@@ -6,11 +6,45 @@
   <body>
     <div id="player"></div>
     <script>
+      var playerElement = document.getElementById("player");
+
+      var r = 3;
+
       var player = new Clappr.Player({
         source: "http://localhost:8080/live/colors/playlist.m3u8",
-        parentId: "#player",
-        mute: true
+        mute: true,
+        disableErrorScreen: true,
+        events: {
+          onError: function(e) {
+            r--;
+            var source = player.options.source;
+            var t = 5;
+            var retry = function() {
+              if (t == 0) {
+                var options = player.options;
+                options.source = source;
+                player.configure(options);
+                return;
+              }
+              Clappr.$("#retryCounter").text(t);
+              t--;
+              setTimeout(retry, 1000);
+            };
+            player.configure({
+              autoPlay: true,
+              source: "playback.error",
+              playbackNotSupportedMessage: 'Video not found. Try running "make ingest" command...' + ((r > 0)
+                ? ' Retrying in <span id="retryCounter"></span> seconds...'
+                : ' All retry attempts failed'),
+            });
+            if (r > 0) {
+              retry();
+            }
+          }
+        }
       });
+
+      player.attachTo(playerElement);
     </script>
   </body>
 </html>
