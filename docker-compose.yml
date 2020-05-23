@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 
 services:
   recorder:
@@ -38,6 +38,11 @@ services:
     ports:
       - "8081:80"
     command: [nginx-debug, "-g", "daemon off;"]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/healthcheck"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
 
   frontend:
     image: openresty/openresty:alpine

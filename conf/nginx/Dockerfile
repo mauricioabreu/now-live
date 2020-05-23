@@ -1,5 +1,7 @@
 FROM nginx:alpine
 
+RUN apk add --no-cache curl
+
 RUN \
   rm -f \
     /etc/nginx/sites-available/minio.conf \
