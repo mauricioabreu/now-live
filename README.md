@@ -10,20 +10,6 @@ Have you ever used live streaming tools like Youtube, Instagram and Facebook? Th
 
 *Now Live* assembles some of these tools together, creating a platform where people can stream their videos, packaging it for multiple devices using standard video formats.
 
-To better understand the platform, we can reduce it in two parts: **producer** and **consumer**.
-
-### Producer
-
-Here we have a diagram representing all the necessary componentes to *produce* video resources.
-
-<img src="docs/producer.png" alt="Producer" title="Producer" width="80%" />
-
-### Consumer
-
-And here we have another diagram, but now we represent the user consuming our streamings.
-
-<img src="docs/consumer.png" alt="Consumer" title="Consumer" width="70%" />
-
 ## How to use?
 
 `make now-live` will build and run all the tools (packager, storage, frontend servers, etc).
